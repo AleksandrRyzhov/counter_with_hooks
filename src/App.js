@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Counter2 from "./Counter2";
+import Counter1 from "./Counter1";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-    <Counter2/>
+    <Counter1/>
       </header>
     </div>
   );
