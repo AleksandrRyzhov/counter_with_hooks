@@ -1,80 +1,41 @@
-
 import './App.css';
 import Setting2 from "./Setting2";
-import React, { useState, useEffect } from 'react';
-
+import React from 'react';
 import './App.css';
+import {useDispatch, useSelector} from "react-redux";
+import {INC, RES, SET} from "./reducer";
 
-function Counter() {
+function Counter(props) {
 
-    const [count, setCount] = useState(0);
-    const [countMax, setCountMax] = useState(5);
-    const [setting, setSet] = useState(false);
-    const [dis, setDis] = useState(false);
+    const {count, countMax, setting} = useSelector(state => ({
+        count: state.count,
+        countMax: state.countMax,
+        setting: state.setting
+    }));
 
-    useEffect(() => {
-        debugger
-        if (count === countMax) {
-            setDis(true)
-        }
-        if (count < 0 || count === countMax || countMax <= count){
-            setDis(true)
-        } else {
-            setDis(false)
-        }
+    const dispatch = useDispatch();
 
-    },[count, countMax]);
-
-    let inc = ()=> setCount(count + 1)
-
-    let res = ()=> {
-        setCount(0);
-        setDis(false)
-
-    }
-
-    let set = ()=> {
-        setSet(true)
-
-    }
-
-    let onTitleChangedStart =(e)=>{
-        setCount(Number(e.currentTarget.value))
-
-    }
-    let onTitleChangedMaxStart =(e)=>{
-        setCountMax(Number(e.currentTarget.value))
-
-
-    };
-
-
-
-    let saveAllSetting = ()=> {
-        setSet(false)
-    }
-
-    const textDisable  = count === countMax ? "text-red" : ""
+    const textDisable = count >= countMax ? "text-red" : ""
 
     return (
         <div className="App">
             <header className="App-header">
-                { setting ?
-                    <Setting2 saveAllSetting={saveAllSetting}
-                             onTitleChangedStart={onTitleChangedStart}
-                             onTitleChangedMaxStart={onTitleChangedMaxStart}
-                             count={count} countMax={countMax}
-                              dis ={dis}
-                    /> :
+                {setting ?
+                    <Setting2/> :
                     <div>
                         <div className={textDisable}>
                             {count}
                         </div>
+                        <div>
+                            {countMax}
+                        </div>
 
-                        <button disabled={dis} onClick={inc}> inc </button>{" "}
-                        <button onClick={res}> res </button>{" "}
-                        <button onClick={set}> set </button>
-                    </div> }
+                        <button disabled={count >= countMax} onClick={() => dispatch({type: INC})}> inc</button>
+                        {" "}
+                        <button onClick={() => dispatch({type: RES})}> res</button>
+                        {" "}
+                        <button onClick={() => dispatch({type: SET})}> set</button>
+                    </div>}
             </header>
         </div>
     );
