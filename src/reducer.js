@@ -1,3 +1,4 @@
+
 export const INC = "INC"
 export const RES = "RES"
 export const SET = "SET"
@@ -26,6 +27,7 @@ export const reducer = (state = initialState, action) => {
             return {...state, count: action.e}
         case CHANGE_MAX_VALUE:
             return {...state, countMax: action.e}
+        default:
     }
     return state;
 }
