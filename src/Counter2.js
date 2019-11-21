@@ -5,7 +5,7 @@ import './App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {INC, RES, SET} from "./reducer";
 
-function Counter(props) {
+function Counter() {
 
     const {count, countMax, setting} = useSelector(state => ({
         count: state.count,
@@ -15,8 +15,7 @@ function Counter(props) {
 
     const dispatch = useDispatch();
 
-    const textDisable = count >= countMax ? "text-red" : ""
-
+    const textDisable = count >= countMax ? "text-red" : "";
     return (
         <div className="App">
             <header className="App-header">

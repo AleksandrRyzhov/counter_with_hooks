@@ -4,7 +4,7 @@ import './App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {CHANGE_MAX_VALUE, CHANGE_START_VALUE, SAVE_ALL_SETTING} from "./reducer";
 
-function Setting(props) {
+function Setting() {
 
     const {count, countMax} = useSelector(state => ({
         count: state.count,
@@ -21,15 +21,15 @@ function Setting(props) {
         dispatch({type: CHANGE_MAX_VALUE, e})
     }
 
-
+    const textDisable = ((count >= countMax) ||(count < 0)) ? "text-red" : ""
     return (
         <div className="App">
             <header className="App-header">
-          <span>
+          <span className={textDisable}>
           start Value: <input onChange={e => onTitleChangedStart(Number(e.currentTarget.value))} value={count}
                               type="number"/>
           </span>
-                <span>
+                <span className={textDisable}>
           max Value: <input onChange={e => onTitleChangedMaxStart(Number(e.currentTarget.value))} value={countMax}
                             type="number"/>
           </span>
